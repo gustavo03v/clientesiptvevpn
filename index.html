@@ -11,10 +11,18 @@
 
     <script>
         class Customer {
-            constructor(name, email, phone) {
+            constructor(name, email, phone, subscription_plan, expiration_days) {
                 this.name = name;
                 this.email = email;
                 this.phone = phone;
+                this.subscription_plan = subscription_plan;
+                this.expiration_days = expiration_days;
+            }
+
+            notifyExpiration() {
+                if (this.expiration_days <= 5) {
+                    console.log(`⚠️ A assinatura de ${this.name} está prestes a expirar em ${this.expiration_days} dias!`);
+                }
             }
         }
 
@@ -41,14 +49,16 @@
             listCustomers() {
                 console.log("Lista de Clientes:");
                 for (const customer of this.customers) {
-                    console.log(`Nome: ${customer.name}, Email: ${customer.email}, Telefone: ${customer.phone}`);
+                    console.log(`Nome: ${customer.name}, Email: ${customer.email}, Telefone: ${customer.phone}, ` +
+                        `Plano: ${customer.subscription_plan}, Dias para expirar: ${customer.expiration_days}`);
+                    customer.notifyExpiration();
                 }
             }
         }
 
         // Exemplo de uso
-        const cliente1 = new Customer("João Silva", "joao@example.com", "123-456-7890");
-        const cliente2 = new Customer("Maria Santos", "maria@example.com", "987-654-3210");
+        const cliente1 = new Customer("João Silva", "joao@example.com", "123-456-7890", "Plano Premium", 10);
+        const cliente2 = new Customer("Maria Santos", "maria@example.com", "987-654-3210", "Plano Básico", 3);
 
         const gerenciamentoClientes = new CustomerManagement();
         gerenciamentoClientes.addCustomer(cliente1);
