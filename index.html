@@ -1,1 +1,73 @@
-<link rel="stylesheet" href="styles.css">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerenciamento de Clientes</title>
+</head>
+<body>
+    <h1>Gerenciamento de Clientes</h1>
+    <p>Adicione, remova e liste os clientes:</p>
+
+    <script>
+        class Customer {
+            constructor(name, email, phone, subscription_plan, expiration_days) {
+                this.name = name;
+                this.email = email;
+                this.phone = phone;
+                this.subscription_plan = subscription_plan;
+                this.expiration_days = expiration_days;
+            }
+
+            notifyExpiration() {
+                if (this.expiration_days <= 5) {
+                    console.log(`⚠️ A assinatura de ${this.name} está prestes a expirar em ${this.expiration_days} dias!`);
+                }
+            }
+        }
+
+        class CustomerManagement {
+            constructor() {
+                this.customers = [];
+            }
+
+            addCustomer(customer) {
+                this.customers.push(customer);
+                console.log(`Cliente ${customer.name} adicionado com sucesso.`);
+            }
+
+            removeCustomer(customer) {
+                const index = this.customers.indexOf(customer);
+                if (index !== -1) {
+                    this.customers.splice(index, 1);
+                    console.log(`Cliente ${customer.name} removido com sucesso.`);
+                } else {
+                    console.log(`Cliente ${customer.name} não encontrado.`);
+                }
+            }
+
+            listCustomers() {
+                console.log("Lista de Clientes:");
+                for (const customer of this.customers) {
+                    console.log(`Nome: ${customer.name}, Email: ${customer.email}, Telefone: ${customer.phone}, ` +
+                        `Plano: ${customer.subscription_plan}, Dias para expirar: ${customer.expiration_days}`);
+                    customer.notifyExpiration();
+                }
+            }
+        }
+
+        // Exemplo de uso
+        const cliente1 = new Customer("João Silva", "joao@example.com", "123-456-7890", "Plano Premium", 10);
+        const cliente2 = new Customer("Maria Santos", "maria@example.com", "987-654-3210", "Plano Básico", 3);
+
+        const gerenciamentoClientes = new CustomerManagement();
+        gerenciamentoClientes.addCustomer(cliente1);
+        gerenciamentoClientes.addCustomer(cliente2);
+
+        gerenciamentoClientes.listCustomers();
+
+        gerenciamentoClientes.removeCustomer(cliente1);
+        gerenciamentoClientes.listCustomers();
+    </script>
+</body>
+</html>
