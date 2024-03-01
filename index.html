@@ -1,7 +1,63 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerenciamento de Clientes</title>
+</head>
 <body>
-    <h1>SEU NOME</h1>
-    <p>Bem-vindo ao meu site!</p>
-    <img src="https://content.codecademy.com/articles/github-pages-via-web-app/happy-ice-cream.gif" alt="Sorvete feliz">
+    <h1>Gerenciamento de Clientes</h1>
+    <p>Adicione, remova e liste os clientes:</p>
+
+    <script>
+        class Customer {
+            constructor(name, email, phone) {
+                this.name = name;
+                this.email = email;
+                this.phone = phone;
+            }
+        }
+
+        class CustomerManagement {
+            constructor() {
+                this.customers = [];
+            }
+
+            addCustomer(customer) {
+                this.customers.push(customer);
+                console.log(`Cliente ${customer.name} adicionado com sucesso.`);
+            }
+
+            removeCustomer(customer) {
+                const index = this.customers.indexOf(customer);
+                if (index !== -1) {
+                    this.customers.splice(index, 1);
+                    console.log(`Cliente ${customer.name} removido com sucesso.`);
+                } else {
+                    console.log(`Cliente ${customer.name} não encontrado.`);
+                }
+            }
+
+            listCustomers() {
+                console.log("Lista de Clientes:");
+                for (const customer of this.customers) {
+                    console.log(`Nome: ${customer.name}, Email: ${customer.email}, Telefone: ${customer.phone}`);
+                }
+            }
+        }
+
+        // Exemplo de uso
+        const cliente1 = new Customer("João Silva", "joao@example.com", "123-456-7890");
+        const cliente2 = new Customer("Maria Santos", "maria@example.com", "987-654-3210");
+
+        const gerenciamentoClientes = new CustomerManagement();
+        gerenciamentoClientes.addCustomer(cliente1);
+        gerenciamentoClientes.addCustomer(cliente2);
+
+        gerenciamentoClientes.listCustomers();
+
+        gerenciamentoClientes.removeCustomer(cliente1);
+        gerenciamentoClientes.listCustomers();
+    </script>
 </body>
 </html>
